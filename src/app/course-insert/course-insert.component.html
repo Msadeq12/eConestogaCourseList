@@ -1,12 +1,50 @@
-<h1>Enter Course Information:</h1>
 
-<form id="enterCoursefrm" name="enterCoursefrm">
-  <fieldset>
-    <legend>Course Info</legend>
+<script src="course-insert.component.ts"></script>
 
-    <label for="description">Course Description:</label>
-    <input type="text" id="description" name="description">
+<div class="card-body">
 
-    <label >Course Code</label>
-  </fieldset>
-</form>
+  <form #myForm="ngForm">
+
+    <fieldset>
+      <legend class="mb-5"><b>Enter Course Information:</b></legend>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Course Name:</label>
+        <input type="text" id="name" name="name"
+               class="form-control"
+               [(ngModel)]="course.courseName">
+      </div>
+
+      <div class="mb-3">
+        <label for="code" class="form-label">Course Code:</label>
+        <input type="text" id="code" name="code"
+               class="form-control"
+               [(ngModel)]="course.courseCode">
+      </div>
+
+      <div class="mb-3">
+        <label for="roomNumber" class="form-label">Room Number:</label>
+        <input type="text" id="roomNumber" name="roomNumber"
+               class="form-control"
+               [(ngModel)]="course.room">
+      </div>
+
+      <div class="mb-3">
+        <label for="teach" class="form-label">Instructor:</label>
+        <input type="text" id="teach" name="teach"
+               class="form-control"
+               [(ngModel)]="course.instructor">
+      </div>
+
+    </fieldset>
+
+    <button type="button" id="btnAdd" name="btnAdd"
+            class="btn btn-primary"
+            (click)="btnAddCourse_click()"
+    >
+      Add Course
+    </button>
+
+  </form>
+
+</div>

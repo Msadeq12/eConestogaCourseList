@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
+import {Course} from "../model/course.model";
+import {DatabaseService} from "../database.service";
 
 @Component({
   selector: 'app-course-insert',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseInsertComponent implements OnInit {
 
-  constructor() { }
+  course: Course = new Course("", "",
+    "", "");
+
+  constructor(private database: DatabaseService) { }
 
   ngOnInit(): void {
   }
+
+  btnAddCourse_click(){
+
+}
 
 }
