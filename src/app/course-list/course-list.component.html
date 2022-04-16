@@ -1,1 +1,44 @@
-<p>course-list works!</p>
+<div class="m-4">
+  <div>
+    <div class="card-header">
+      <h2>List of books</h2>
+    </div>
+
+    <div *ngIf="courses.length == 0; else showTable"><h2>No records available</h2></div>
+
+    <ng-template #showTable>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Course Name</th>
+            <th>Course Code</th>
+            <th>Room Number</th>
+            <th>Instructor</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let course of courses">
+            <td>{{course.courseName}}</td>
+            <td>{{course.courseCode}}</td>
+            <td>{{course.room}}</td>
+            <td>{{course.instructor}}</td>
+
+            <button type="button" (click)="btnEdit_click(course)">
+              <img src="{{editPath}}" alt="editPic" width="50" height="50">
+            </button>
+
+            <button type="button" (click)="btnRemove_click(course)">
+              <img src="{{deletePath}}" alt="removePic" width="50" height="50">
+            </button>
+
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+
+
+
+  </div>
+</div>
+

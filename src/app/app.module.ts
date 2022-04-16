@@ -9,6 +9,7 @@ import { CourseInsertComponent } from './course-insert/course-insert.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { SettingsComponent } from './settings/settings.component';
+import { ModifyCourseComponent } from './modify-course/modify-course.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SettingsComponent } from './settings/settings.component';
     CourseInsertComponent,
     HomepageComponent,
     CourseListComponent,
-    SettingsComponent
+    SettingsComponent,
+    ModifyCourseComponent
   ],
     imports: [
         BrowserModule,

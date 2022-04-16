@@ -19,6 +19,11 @@ export class CourseInsertComponent implements OnInit {
 
   btnAddCourse_click(){
 
-}
+    this.database.insert(this.course, () => {
+      console.log("course added!");
+      alert("Course added to CourseDB!");
+    });
+  }
+
 
 }

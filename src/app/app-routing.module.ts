@@ -5,12 +5,14 @@ import {CourseInsertComponent} from "./course-insert/course-insert.component";
 import {HomepageComponent} from "./homepage/homepage.component";
 import {CourseListComponent} from "./course-list/course-list.component";
 import {SettingsComponent} from "./settings/settings.component";
+import {ModifyCourseComponent} from "./modify-course/modify-course.component";
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'home', component: HomepageComponent},
   {path: 'addCourse', component: CourseInsertComponent},
   {path: 'list', component: CourseListComponent},
+  {path: 'edit', component: ModifyCourseComponent},
   {path: 'setting', component: SettingsComponent}
 ];
 

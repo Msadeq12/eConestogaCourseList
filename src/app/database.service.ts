@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-
+import {Course} from "./model/course.model";
 
 
 declare function openDatabase(dbName, version, name, size, successCreate): any;
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class DatabaseService {
 
   private db: any = null;
 
-  constructor() { }
+  constructor() {
+
+  }
 
   private static errorHandler(error): any {
     console.error("Some error: " + error);
@@ -97,6 +101,133 @@ export class DatabaseService {
     return this.db;
   }
 
+  public insert(course: Course, callback){
+    function txFunction(tx: any){
+      var sqlCommands: string = "INSERT INTO Courses(courseName, courseCode, roomNumber, instructor)" +
+        " VALUES(?,?,?,?)";
 
+      var options = [course.courseName, course.courseCode, course.room, course.instructor];
+
+      tx.executeSql(sqlCommands, options, callback, DatabaseService.errorHandler);
+
+    }
+
+    this.getDB().transaction(txFunction, DatabaseService.errorHandler, () => {
+        console.log("Course inserted successfully!");
+    });
+  }
+
+  public selectAll(): Promise<any>{
+    let options = [];
+    let courses: Course[] = [];
+
+    return new Promise((resolve, reject) => {
+
+      function txFunction(tx){
+
+        let sqlCommands: string = "SELECT * FROM Courses;";
+
+        tx.executeSql(sqlCommands, options, (tx, dbResults) => {
+
+          if(dbResults.rows.length > 0){
+
+            for(let i =0; i < dbResults.rows.length; i++){
+              let row = dbResults.rows[i];
+              let course = new Course(row['courseName'], row['courseCode'],
+                row['roomNumber'], row['instructor']);
+
+              course.id = row['id'];
+
+              courses.push(course);
+            }
+
+            resolve(courses);
+
+          }
+
+          else{
+            reject("No courses found in CourseDB");
+          }
+
+        }, DatabaseService.errorHandler);
+
+      }
+
+      this.getDB().transaction(txFunction, DatabaseService.errorHandler, () => {
+        console.log("selectAll successfully performed!");
+      });
+
+    });
+
+  }
+
+  public delete(course: Course, callback){
+
+    function txFunction(tx: any){
+
+      var sqlCommands: string = "DELETE FROM Courses WHERE id=?;";
+
+      var options = [course.id];
+
+      tx.executeSql(sqlCommands, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDB().transaction(txFunction, DatabaseService.errorHandler, () =>{
+      console.log("Delete successfully performed!");
+    });
+
+  }
+
+  public update(course: Course, callback){
+    function txFunction(tx: any){
+
+      var sqlCommmands = "UPDATE Courses SET courseName=?, courseCode=?," +
+        " roomNumber=?, instructor=? WHERE id=?;";
+
+      var options = [course.courseName, course.courseCode, course.room,
+      course.instructor, course.id];
+
+      tx.executeSql(sqlCommmands, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDB().transaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Updated transaction successfully!");
+    });
+  }
+
+  public select(id: number): Promise<any>{
+    let options = [id];
+    let course : Course[] = null;
+
+    return new Promise((resolve, reject) => {
+
+      function txFunction(tx){
+
+        let sqlCommands = "SELECT * FROM Courses WHERE id=?";
+
+        tx.executeSql(sqlCommands, options, (tx, dbResults) => {
+
+          if(dbResults.rows.length > 0){
+
+            let row = dbResults.rows[0];
+            let course = new Course(row['courseName'], row['courseCode'],
+              row['roomNumber'], row['instructor']);
+            course.id = row['id'];
+
+            resolve(course);
+          }
+
+          else{
+            reject("No courses found in CourseDB!");
+          }
+        }, DatabaseService.errorHandler);
+      }
+
+      this.getDB().transaction(txFunction, DatabaseService.errorHandler, () =>{
+        console.log("Select transaction successfully completed!");
+      });
+    });
+
+  }
 
 }
