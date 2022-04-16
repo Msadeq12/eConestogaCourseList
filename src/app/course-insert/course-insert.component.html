@@ -7,40 +7,44 @@
   <form #myForm="ngForm">
 
     <fieldset>
-      <legend class="mb-5"><b>Enter Course Information:</b></legend>
-
+      <form class="mb-5"><b><h2>Enter Course Information:</h2></b>
+        <br><br>
+        <form id="CourseInformation">
+          <br>
       <div class="mb-3">
         <label for="name" class="form-label">Course Name:</label>
         <input type="text" id="name" name="name"
                class="form-control"
                [(ngModel)]="course.courseName">
       </div>
-      <br>
+      <br><br>
       <div class="mb-3">
         <label for="code" class="form-label">Course Code:</label>
         <input type="text" id="code" name="code"
                class="form-control"
                [(ngModel)]="course.courseCode">
       </div>
-      <br>
+      <br><br>
       <div class="mb-3">
         <label for="roomNumber" class="form-label">Room Number:</label>
         <input type="text" id="roomNumber" name="roomNumber"
                class="form-control"
                [(ngModel)]="course.room">
       </div>
-      <br>
+      <br><br>
       <div class="mb-3">
         <label for="teach" class="form-label">Instructor:</label>
         <input type="text" id="teach" name="teach"
                class="form-control"
                [(ngModel)]="course.instructor">
       </div>
-      <br>
+          <br><br>
+        </form>
+      </form>
     </fieldset>
-
+    <br><br>
     <button type="button" id="btnAdd" name="btnAdd"
-            class="btn btn-primary"
+            class="btn btn-dark"
             (click)="btnAddCourse_click()"
     >
       Add Course
