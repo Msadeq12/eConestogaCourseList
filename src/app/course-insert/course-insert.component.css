@@ -1,19 +1,10 @@
 #CourseInformation {
-  border: solid 5px;
-  width: 600px;
+
+  width: 100%;
   padding-left: 10px;
 }
 input{
   border: solid 2px;
 }
-label {
-  float: left;
-  width: 150px;
-}
-input[type=text] {
-  float: left;
-  width: 250px;
-}
-form{
-  padding-left: 15px;
-}
+
+

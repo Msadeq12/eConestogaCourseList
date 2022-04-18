@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SettingsComponent } from './settings.component';
+import { CameraComponent } from './camera.component';
 
-describe('SettingsComponent', () => {
-  let component: SettingsComponent;
-  let fixture: ComponentFixture<SettingsComponent>;
+describe('CameraComponent', () => {
+  let component: CameraComponent;
+  let fixture: ComponentFixture<CameraComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
+      declarations: [ CameraComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SettingsComponent);
+    fixture = TestBed.createComponent(CameraComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

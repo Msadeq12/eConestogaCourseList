@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Course} from "../model/course.model";
 import {DatabaseService} from "../database.service";
 import {Router} from "@angular/router";
+import {Type} from "../model/type.model";
 
 @Component({
   selector: 'app-course-list',
@@ -11,8 +12,9 @@ import {Router} from "@angular/router";
 export class CourseListComponent implements OnInit {
 
   courses: Course[] = [];
-  editPath: string = "../assets/images/edit.png";
-  deletePath: string = "../assets/images/trash.png";
+
+  editPath: string = "./assets/images/edit.png";
+  deletePath: string = "./assets/images/trash.png";
 
 
   constructor(private database: DatabaseService, private router: Router) {
@@ -30,6 +32,9 @@ export class CourseListComponent implements OnInit {
       .catch(error => {
         console.error(error);
       });
+
+
+
   }
 
   // edits the page
@@ -41,10 +46,13 @@ export class CourseListComponent implements OnInit {
   btnRemove_click(course){
     this.database.delete(course, () => {
       alert("Course deleted!");
+      this.router.navigate(['']);
     })
 
-    window.location.reload();
+    this.ngOnInit();
 
   }
+
+
 
 }

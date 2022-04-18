@@ -1,3 +1,4 @@
+
 <div class="m-4">
   <div>
     <div class="card-header">
@@ -7,34 +8,60 @@
     <div *ngIf="courses.length == 0; else showTable"><h2>No records available</h2></div>
 
     <ng-template #showTable>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Course Name</th>
-            <th>Course Code</th>
-            <th>Room Number</th>
-            <th>Instructor</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          <tr *ngFor="let course of courses">
-            <td>{{course.courseName}}</td>
-            <td>{{course.courseCode}}</td>
-            <td>{{course.room}}</td>
-            <td>{{course.instructor}}</td>
+      <div *ngFor=" let course of courses" class="m-4">
 
-            <button type="button" (click)="btnEdit_click(course)">
-              <img src="{{editPath}}" alt="editPic" width="50" height="50">
-            </button>
+        <p>
+          <a class="btn btn-dark" data-bs-toggle="collapse" href="#collapseExample"
+             role="button" aria-expanded="false" aria-controls="collapseExample">
 
-            <button type="button" (click)="btnRemove_click(course)">
-              <img src="{{deletePath}}" alt="removePic" width="50" height="50">
-            </button>
+            <b>Course:</b> {{course.courseName}}
+          </a>
+        </p>
 
-          </tr>
-        </tbody>
-      </table>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+            <h3>Course Code:</h3>
+            <p>{{course.courseCode}}</p>
+
+            <h3>Room:</h3>
+            <p>{{course.room}}</p>
+
+            <h3>Delivery:</h3>
+
+            <div *ngIf="course.delivery == 1; else showBook">
+              <img src="./assets/images/wifi.png" width="30" height="30" alt="wifi">
+            </div>
+
+            <ng-template #showBook>
+              <img src="./assets/images/book.png" width="30" height="30" alt="book">
+            </ng-template>
+
+            <h3>Instructor:</h3>
+            <p>{{course.instructor}}</p>
+
+            <div class="btn-toolbar" role="group" aria-label="Editdel group">
+
+              <button type="button" (click)="btnEdit_click(course)">
+                <img src="{{editPath}}" alt="editPic" width="50" height="50">
+              </button>
+
+              <button type="button" (click)="btnRemove_click(course)">
+                <img src="{{deletePath}}" alt="removePic" width="50" height="50">
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+
     </ng-template>
 
 

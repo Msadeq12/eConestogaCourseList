@@ -9,7 +9,7 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
-  path: string = "../assets/images/conestoga.png";
+  path: string = "./assets/images/conestoga.png";
   alt: string = "conestogaPic";
 
   ngOnInit(): void {

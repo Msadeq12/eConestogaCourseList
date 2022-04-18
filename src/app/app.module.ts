@@ -8,8 +8,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CourseInsertComponent } from './course-insert/course-insert.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CourseListComponent } from './course-list/course-list.component';
-import { SettingsComponent } from './settings/settings.component';
+
 import { ModifyCourseComponent } from './modify-course/modify-course.component';
+import { CameraComponent } from './camera/camera.component';
 
 
 @NgModule({
@@ -19,8 +20,8 @@ import { ModifyCourseComponent } from './modify-course/modify-course.component';
     CourseInsertComponent,
     HomepageComponent,
     CourseListComponent,
-    SettingsComponent,
-    ModifyCourseComponent
+    ModifyCourseComponent,
+    CameraComponent
   ],
     imports: [
         BrowserModule,
