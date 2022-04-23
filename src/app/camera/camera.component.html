@@ -8,7 +8,18 @@
     </div><br>
 
     <div class="row">
-      <img id="imgSnap" name="imgSnap" src="" width="100%" alt="photo" class="img-fluid"><br>
+      <form class="mb-5">
+        <label for="instructorName">Instructor Name:</label>
+        <input type="text" name="instrcutorName" id="instructorName" class="form-control"
+        [(ngModel)]="instructor.instructorName">
+
+        <label for="imgSnap">Image:</label><br>
+        <img id="imgSnap" name="imgSnap" src="" width="100%" alt="photo" class="img-fluid"
+        [(ngModel)]="instructor.image">
+      </form>
+
+      <button class="btn btn-secondary" id="btnEnter" (click)="btnEnter_click()">Enter Instructor</button>
+
     </div>
 
     <div class="row">

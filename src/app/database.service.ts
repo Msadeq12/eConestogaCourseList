@@ -1,6 +1,7 @@
 import {Injectable,} from '@angular/core';
 import {Course} from "./model/course.model";
 import {Type} from "./model/type.model";
+import {Instructor} from "./model/instructor.model";
 
 
 declare function openDatabase(dbName, version, name, size, successCreate): any;
@@ -85,6 +86,26 @@ export class DatabaseService {
     });
   }
 
+  private createInstructors(): void{
+
+    function txFunction(tx: any): void{
+      var sql = "CREATE TABLE IF NOT EXISTS Instructors(" +
+        "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " +
+        "name VARCHAR(20), " +
+        "photo BLOB);";
+
+      var options = [];
+
+      tx.executeSql(sql, options, () => {
+        console.info("Table: Instructors successfully created.");
+      }, DatabaseService.errorHandler);
+    }
+
+    this.getDB().transaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Table instructors transaction successfully created.");
+    })
+  }
+
   private dropTableCourse(): void{
     function txFunction(tx: any): void{
       var sqlCommand: string = "DROP TABLE IF EXISTS Courses;";
@@ -109,6 +130,7 @@ export class DatabaseService {
         this.CreateDatabase();
         this.createDBTables();
         this.createType();
+        this.createInstructors();
       }
       catch(e){
         console.error("Error: initDB function" + e);
@@ -150,6 +172,20 @@ export class DatabaseService {
     this.getDB().transaction(txFunction, DatabaseService.errorHandler, () => {
         console.log("Course inserted successfully!");
     });
+  }
+
+  public insertInstructor(instructor: Instructor, callback){
+    function txFunction(tx: any){
+      var sql: string = "INSERT INTO Instructor(name, photo) VALUES(?,?);";
+
+      var options =  [instructor.instructorName, instructor.image];
+
+      tx.executeSql(sql, options, callback, DatabaseService.errorHandler);
+    }
+
+    this.getDB().trasnaction(txFunction, DatabaseService.errorHandler, () => {
+      console.log("Instructor inserted successfully.");
+    })
   }
 
   public selectAll(): Promise<any>{
